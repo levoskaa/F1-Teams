@@ -32,6 +32,16 @@ namespace F1Teams.DAL
                 .ToList();
         }
 
+        public async Task<Team> FindById(int id)
+        {
+            var dbTeam = await db.Teams.FindAsync(id);
+            if (dbTeam == null)
+            {
+                return null;
+            }
+            return ToTeam(dbTeam);
+        }
+
         public async Task Update(Team team)
         {
             var dbTeam = await db.Teams.FindAsync(team.Id);
@@ -44,15 +54,16 @@ namespace F1Teams.DAL
             await db.SaveChangesAsync();
         }
 
-        public async Task Delete(int id)
+        public async Task<bool> Delete(int id)
         {
             var dbTeam = await db.Teams.FindAsync(id);
             if (dbTeam == null)
             {
-                return;
+                return false;
             }
             db.Teams.Remove(dbTeam);
             await db.SaveChangesAsync();
+            return true;
         }
 
         /// <summary>

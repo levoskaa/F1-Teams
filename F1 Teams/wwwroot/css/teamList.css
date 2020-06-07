@@ -1,0 +1,15 @@
+﻿.table {
+    width: 100%;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: #c2d5f2;
+}
+
+.table.td-vertical-center td {
+    vertical-align: middle;
+}
+
+.btn-sm {
+    width: 60px;
+}

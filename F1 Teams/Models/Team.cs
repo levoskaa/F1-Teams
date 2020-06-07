@@ -2,6 +2,9 @@
 
 namespace F1Teams.Models
 {
+    /// <summary>
+    /// Domain class modeling a Team.
+    /// </summary>
     public class Team
     {
         [Key]

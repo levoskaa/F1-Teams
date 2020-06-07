@@ -1,0 +1,61 @@
+﻿@model Team
+
+<h2 class="text-info" style="margin-left:10%">@(Model.Id == 0 ? "Create" : "Edit") Team</h2>
+
+<div class="container border" style="padding:30px; width:80%">
+    <form method="post" )>
+        @if (Model.Id != 0)
+        {
+            <input type="hidden" asp-for="Id" />
+        }
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="Name"></label>
+            </div>
+            <div class="col-6">
+                <input type="text" class="form-control" asp-for="Name" />
+                <span class="text-danger" asp-validation-for="Name"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="YearFormed">Year of formation</label>
+            </div>
+            <div class="col-6">
+                <input type="number" class="form-control" asp-for="YearFormed" />
+                <span class="text-danger" asp-validation-for="YearFormed"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="ChampionshipsWon">Championships won</label>
+            </div>
+            <div class="col-6">
+                <input type="number" class="form-control" asp-for="ChampionshipsWon" />
+                <span class="text-danger" asp-validation-for="ChampionshipsWon"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-3">
+                <label asp-for="HasPaidEntryFee">Paid for entry</label>
+            </div>
+            <div class="col-6">
+                <input type="checkbox" class="form-check form-check-inline" asp-for="HasPaidEntryFee" />
+                <span class="text-danger" asp-validation-for="HasPaidEntryFee"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-3 offset-3">
+                <button type="submit" class="btn btn-primary btn-sm text-white form-control" asp-action="@(Model.Id == 0 ? "Insert" : "Update")">@(Model.Id == 0 ? "Create" : "Update")</button>
+            </div>
+            <div class="col-3">
+                <a class="btn btn-secondary btn-sm text-white form-control" asp-action="Index" asp-controller="Teams">Back to list</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
