@@ -1,10 +1,14 @@
+using F1Teams.DAL;
+using F1Teams.DAL.EfDbContext;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace F1_Teams
+namespace F1Teams
 {
     public class Startup
     {
@@ -19,6 +23,19 @@ namespace F1_Teams
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+            var masterConnection = new SqliteConnection(Configuration.GetConnectionString("InMemory"));
+            masterConnection.Open();
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseSqlite(masterConnection)
+                .Options;
+            using (var context = new ApplicationDbContext(options))
+            {
+                context.Database.EnsureCreated();
+            }
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(masterConnection));
+
+            services.AddScoped<ITeamRepository, TeamRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
