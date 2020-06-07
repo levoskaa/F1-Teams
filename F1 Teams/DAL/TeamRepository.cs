@@ -1,5 +1,4 @@
-﻿using F1_Teams.DAL.EfDbContext;
-using F1Teams.DAL.EfDbContext;
+﻿using F1Teams.DAL.EfDbContext;
 using F1Teams.Models;
 using System.Collections.Generic;
 using System.Linq;

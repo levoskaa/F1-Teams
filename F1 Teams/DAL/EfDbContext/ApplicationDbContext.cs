@@ -1,5 +1,4 @@
-﻿using F1_Teams.DAL.EfDbContext;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace F1Teams.DAL.EfDbContext
 {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace F1_Teams.DAL.EfDbContext
+namespace F1Teams.DAL.EfDbContext
 {
     /// <summary>
     /// Persistent class of the Team domain class.

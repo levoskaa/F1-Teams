@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using F1Teams.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using F1_Teams.Models;
+using System.Diagnostics;
 
-namespace F1_Teams.Controllers
+namespace F1Teams.Controllers
 {
     /// <summary>
     /// Controller for the Main page.

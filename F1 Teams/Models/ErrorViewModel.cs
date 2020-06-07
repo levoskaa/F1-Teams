@@ -1,6 +1,6 @@
 using System;
 
-namespace F1_Teams.Models
+namespace F1Teams.Models
 {
     public class ErrorViewModel
     {
