@@ -25,6 +25,7 @@ namespace F1Teams.Controllers
             this.teamRepository = teamRepository;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             var teams = teamRepository.List();
@@ -35,6 +36,7 @@ namespace F1Teams.Controllers
         /// Manages the creation / modification of Teams.
         /// </summary>
         /// <param name="id">Id of the Team to be updated. Null means a new instance will be created.</param>
+        [HttpGet]
         public async Task<IActionResult> Upsert(int? id)
         {
             Team = new Team();

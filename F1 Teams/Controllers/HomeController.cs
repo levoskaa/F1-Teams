@@ -10,6 +10,7 @@ namespace F1Teams.Controllers
     /// </summary>
     public class HomeController : Controller
     {
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
