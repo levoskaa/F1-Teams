@@ -29,6 +29,10 @@ namespace F1Teams.Controllers
         [HttpGet]
         public IActionResult SignIn()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
@@ -61,7 +65,10 @@ namespace F1Teams.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SignOut()
         {
-            await signInManager.SignOutAsync();
+            if (User.Identity.IsAuthenticated)
+            {
+                await signInManager.SignOutAsync();
+            }
             return RedirectToAction("Index", "Home");
         }
     }

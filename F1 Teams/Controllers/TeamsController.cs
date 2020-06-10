@@ -1,5 +1,6 @@
 ﻿using F1Teams.DAL;
 using F1Teams.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -37,6 +38,7 @@ namespace F1Teams.Controllers
         /// </summary>
         /// <param name="id">Id of the Team to be updated. Null means a new instance will be created.</param>
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Upsert(int? id)
         {
             Team = new Team();
@@ -57,6 +59,7 @@ namespace F1Teams.Controllers
         /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Insert()
         {
             if (ModelState.IsValid)
@@ -78,6 +81,7 @@ namespace F1Teams.Controllers
         /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Update()
         {
             if (ModelState.IsValid)
@@ -99,6 +103,7 @@ namespace F1Teams.Controllers
         /// <returns>Json containing a success flag and a message.</returns>
         [HttpDelete]
         [Route("/api/teams")]
+        [Authorize]
         public async Task<IActionResult> Delete(int id)
         {
             bool result = await teamRepository.Delete(id);
