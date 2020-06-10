@@ -16,12 +16,15 @@ namespace F1Teams.Models
         public string Name { get; set; }
 
         [Range(1, 9999, ErrorMessage = "Year of formation must be a number between 1 and 9999!")]
+        [Display(Name = "Year of formation")]
         public int? YearFormed { get; set; }
 
         [Range(0, 999, ErrorMessage = "Championships won must be a number between 0 and 999!")]
+        [Display(Name = "Championships won")]
         public int? ChampionshipsWon { get; set; }
 
         [Required]
+        [Display(Name = "Paid for entry")]
         public bool HasPaidEntryFee { get; set; }
     }
 }
