@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace F1Teams.DAL.EfDbContext
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
         public DbSet<DbTeam> Teams { get; set; }
 
@@ -29,6 +31,8 @@ namespace F1Teams.DAL.EfDbContext
             modelBuilder.Entity<DbTeam>()
                 .Property(team => team.HasPaidEntryFee)
                 .IsRequired(required: true);
+
+            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole { Name = "admin", NormalizedName = "Admin".ToUpper() });
         }
     }
 }

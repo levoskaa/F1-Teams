@@ -2,6 +2,7 @@ using F1Teams.DAL;
 using F1Teams.DAL.EfDbContext;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -24,6 +25,7 @@ namespace F1Teams
         {
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
+            // Opening a master connection to the in-memory database to keep it alive between different calls.
             var masterConnection = new SqliteConnection(Configuration.GetConnectionString("InMemory"));
             masterConnection.Open();
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
@@ -36,6 +38,10 @@ namespace F1Teams
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(masterConnection));
 
             services.AddScoped<ITeamRepository, TeamRepository>();
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,11 +58,12 @@ namespace F1Teams
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
