@@ -34,14 +34,14 @@
                             @if (signInManager.IsSignedIn(User))
                             {
                                 <form method="post">
-                                    <button type="submit" class="btn btn-sm btn-outline-secondary text-dark" asp-action="SignOut" asp-controller="Account">
+                                    <button type="submit" class="btn btn-sm btn-outline-secondary text-dark text-nowrap" asp-action="SignOut" asp-controller="Account">
                                         Sign out @(User.Identity.Name)
                                     </button>
                                 </form>
                             }
                             else
                             {
-                                <a class="btn btn-sm btn-outline-secondary text-dark" asp-controller="Account" asp-action="SignIn">Sign in</a>
+                                <a class="btn btn-sm btn-outline-secondary text-dark text-nowrap" asp-controller="Account" asp-action="SignIn">Sign in</a>
                             }
                         </li>
                     </ul>

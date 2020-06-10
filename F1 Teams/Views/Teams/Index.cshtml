@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Team>
+﻿@inject SignInManager<IdentityUser> signInManager;
+@model IEnumerable<Team>
 @section Styles {
     <link rel="stylesheet" href="~/css/teamList.css" type="text/css" />
 }
@@ -7,11 +8,14 @@
     <div class="col-7">
         <h2 class="text-info">List of Teams</h2>
     </div>
-    <div class="col-2 offset-3">
-        <a asp-action="Upsert" asp-controller="Teams" class="btn btn-info form-control text-white">
-            Add new Team
-        </a>
-    </div>
+    @if (signInManager.IsSignedIn(User))
+    {
+        <div class="col-2 offset-3">
+            <a asp-action="Upsert" asp-controller="Teams" class="btn btn-info form-control text-white">
+                Add new Team
+            </a>
+        </div>
+    }
 
     <div class="col-12 mt-3">
         @if (Model.Count() > 0)
@@ -31,9 +35,12 @@
                         <th>
                             <label asp-for=@Model.FirstOrDefault().HasPaidEntryFee></label>
                         </th>
-                        <th>
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            <th>
 
-                        </th>
+                            </th>
+                        }
                     </tr>
                 </thead>
                 @foreach (var team in Model)
@@ -58,11 +65,14 @@
                                 <div>&#x274C;</div>
                             }
                         </td>
-                        <td class="text-center px-2" width="160px">
-                            <a class="btn btn-success btn-sm text-white" asp-controller="Teams" asp-action="Upsert" asp-route-id="@team.Id">Edit</a>
-                            &nbsp;
-                            <button class="btn btn-danger btn-sm text-white" onclick="Delete('/api/teams?id='+@team.Id)">Delete</button>
-                        </td>
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            <td class="text-center px-2" width="160px">
+                                <a class="btn btn-success btn-sm my-btn-sm text-white" asp-controller="Teams" asp-action="Upsert" asp-route-id="@team.Id">Edit</a>
+                                &nbsp;
+                                <button class="btn btn-danger btn-sm my-btn-sm text-white" onclick="Delete('/api/teams?id='+@team.Id)">Delete</button>
+                            </td>
+                        }
                     </tr>
                 }
             </table>
